@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { Cliente } from './cliente'
+import { ClienteService } from '../cliente.service'
 
 
 @Component({
@@ -28,9 +29,12 @@ export class CadastroComponent {
 
   cliente: Cliente = Cliente.newCliente();
 
+  constructor(private clienteService: ClienteService){
 
+  }
 
   salvar(){
-    console.log(this.cliente);
+
+    this.clienteService.salvar(this.cliente);
   }
 }
