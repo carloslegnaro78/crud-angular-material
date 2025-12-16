@@ -11,8 +11,10 @@ export class ClienteService {
   constructor() { }
 
   salvar(cliente: Cliente){
-    // Lógica para salvar o cliente (ex: enviar para um servidor)
-    console.log('cliente:', cliente);
+    const storage = this.obtenerClientes();
+    storage.push(cliente);
+
+    localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(storage));
   }
 
   obtenerClientes(): Cliente[] {
