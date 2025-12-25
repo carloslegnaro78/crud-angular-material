@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Cliente } from './cadastro/cliente';
 
@@ -16,6 +15,24 @@ export class ClienteService {
     storage.push(cliente);
 
     localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(storage));
+  }
+
+  atualizar(cliente: Cliente){
+    const storage = this.obterStorage();
+    storage.forEach(c => {
+      if(c.id === cliente.id){
+        Object.assign(c, cliente);
+      }
+    })
+    localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(storage));
+  }
+
+  deletar(cliente: Cliente){
+    const storage = this.obterStorage();
+
+    const novaLista = storage.filter(c => c.id !== cliente.id)
+
+    localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(novaLista));
   }
 
   pesquisarClientes(nomeBusca: string) : Cliente[] {
@@ -40,7 +57,7 @@ export class ClienteService {
       const clientes: Cliente[] = JSON.parse(repositorioClientes);
       return clientes;
     }
-
+    
     const clientes: Cliente[] = [];
     localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(clientes));
     return clientes;

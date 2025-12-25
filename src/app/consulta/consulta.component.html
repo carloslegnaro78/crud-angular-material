@@ -1,4 +1,3 @@
-
 <div fxLayout="row" fxLayoutAlign="center">
     <div fxLayout="column" fxFlex="1000px">
         <form class="mt-60" #buscaForm="ngForm" (ngSubmit)="pesquisar()">
@@ -69,9 +68,21 @@
                                 <mat-icon fontIcon="edit"></mat-icon>
                                 Editar
                             </button>
+
+                            @if(!cliente.deletando){
+                                <button type="button" mat-button (click)="preparaDeletar(cliente)">
+                                    <mat-icon fontIcon="delete"></mat-icon>
+                                    Deletar
+                                </button>
+                            } @else {
+                                <button type="button" mat-button (click)="deletar(cliente)">
+                                    <mat-icon fontIcon="question_mark"></mat-icon>
+                                    Confirma
+                                </button>
+                            }
                         </td>
                     </ng-container>
-
+                    
 
                     <tr mat-header-row *matHeaderRowDef="colunasTable"></tr>
                     <tr mat-row *matRowDef="let row; columns: colunasTable" ></tr>
